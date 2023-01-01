@@ -1,0 +1,82 @@
+@import "./size.scss";
+@import "./colors.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 60%;
+    margin: 24% auto;
+    position: relative;
+    background-color: $bg-color;
+}
+
+.container {
+    padding-top: 10px;
+}
+
+@mixin lower($lower, $track-height) {
+    $lower-background: linear-gradient(to bottom, $lower, $lower) 100% 50% / 100% $track-height no-repeat transparent;
+    background: $lower-background;
+
+}
+
+.link {
+    text-decoration: none;
+    color: #FFF;
+    display: flex;
+    justify-content: end;
+    padding-top: 10px;
+}
+
+@mixin e-range ($lower, $border, $newtrack, $height) {
+    display: block;
+    appearance: none;
+    width: 100%;
+    margin: 0;
+    height: 40px;
+    padding: 10px 10px;
+    border-radius: $border;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+
+    &::-webkit-slider-runnable-track {
+        width: 10%;
+        height: $height;
+        
+        @include lower($lower, ($track-height+$newtrack))
+    }
+
+    &::-webkit-slider-thumb {
+        position: relative;
+        appearance: none;
+        height: $height;
+        width: $height;
+        background: #fff;
+        border: 3px solid $lower;
+        border-radius: 100%;
+        top: 50%;
+        margin-top: (-$height/2);
+    }
+
+}
+
+.e-range-green {
+    @include e-range($lower-color, 40px, 0px, 20px);
+}
+
+.e-range-red {
+    @include e-range($lower-red, 5px, 10px, 25px);
+}
+
+.e-range-greenStrong {
+    @include e-range($lower-greenStrong, 5px, 10px, 25px);
+}
+
+.e-range-blue {
+    @include e-range($lower-blue, 5px, 10px, 25px);
+}
